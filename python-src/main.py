@@ -18,8 +18,7 @@ pin_cfg = {
 
 class Runner:
     def __init__(self):
-        #server_ip = "192.168.2.1"
-        server_ip = "131.159.198.40"
+        server_ip = "192.168.2.1"
         server_port = 5001
         client_ip = "192.168.2.72"
         client_port = 5003
