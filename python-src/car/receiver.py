@@ -6,7 +6,7 @@ import numpy as np
 SMOOTHING_WINDOW = 5
 
 class Receiver:
-    def __init__(self, steering_port):
+    def __init__(self, steering_port, callback):
         self.__receiver_thread = threading.Thread(
             target=self.loop, args=()
         )
@@ -25,23 +25,24 @@ class Receiver:
         self.__receiver_thread.start()
 
     def trigger_callback(self, channel):
-        if not GPIO.input(self.__steering_port):
-            self.__downTimes.append(time.time())
-            if len(self.__downTimes) > SMOOTHING_WINDOW:
-                del self.__downTimes[0]
-        else:
+        if GPIO.input(self.__steering_port):
             self.__upTimes.append(time.time())
             if len(self.__upTimes) > SMOOTHING_WINDOW: 
                 del self.__upTimes[0] # rotate buffer
+
+            if len(self.__deltaTimes) > SMOOTHING_WINDOW:
+                del self.__deltaTimes[0]  
+        else:
+            self.__downTimes.append(time.time())
+            if len(self.__downTimes) > SMOOTHING_WINDOW:
+                del self.__downTimes[0]      
         
-        self.__deltaTimes.append((downTimes[-1] - upTimes[-2]) / (upTimes[-1] - downTimes[-1]))
-        if len(self.__deltaTimes) > SMOOTHING_WINDOW:
-            del self.__deltaTimes[0]
+            self.__deltaTimes.append(100 * (self.__downTimes[-2] - self.__upTimes[-2]) / (self.__upTimes[-1] - self.__upTimes[-2]))
 
     def loop(self):
         while True:
-            ovl = self.__deltaTimes[-SMOOTHING_WINDOW:] # output first pin PWM
-            #ov = sorted(ovl)[len(ovl) // 2] 
-            ov = np.mean(ovl)
-            print("receiver: " + str(ov))
+            values = self.__deltaTimes[-SMOOTHING_WINDOW:]
+            print(values)
+            average = np.mean(values)
+            self.__callback((average - 6.5) / (13 - 6.5) * 100)
             time.sleep(0.1)
