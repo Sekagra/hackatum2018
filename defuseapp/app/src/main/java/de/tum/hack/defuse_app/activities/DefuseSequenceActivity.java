@@ -1,5 +1,6 @@
 package de.tum.hack.defuse_app.activities;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import de.tum.hack.defuse_app.EmojiHelper;
 import de.tum.hack.defuse_app.R;
 import de.tum.hack.defuse_app.model.Code;
 
@@ -18,6 +20,9 @@ public class DefuseSequenceActivity extends AppCompatActivity {
     TextView txtDefuse3;
     List<Code> codes;
     Random rng;
+    Code currentCode;
+    int rounds;
+    int errorCount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,18 +46,30 @@ public class DefuseSequenceActivity extends AppCompatActivity {
         showRandomSelection();
     }
 
-    private String getEmojiByUnicode(int unicode){
-        return new String(Character.toChars(unicode));
-    }
+
 
     private void showRandomSelection() {
         Code c = this.codes.get(this.rng.nextInt(this.codes.size()));
-        this.txtDefuse1.setText(getEmojiByUnicode(c.getCode1()));
-        this.txtDefuse2.setText(getEmojiByUnicode(c.getCode2()));
-        this.txtDefuse3.setText(getEmojiByUnicode(c.getCode3()));
+        this.txtDefuse1.setText(EmojiHelper.getEmojiByUnicode(c.getCode1()));
+        this.txtDefuse2.setText(EmojiHelper.getEmojiByUnicode(c.getCode2()));
+        this.txtDefuse3.setText(EmojiHelper.getEmojiByUnicode(c.getCode3()));
+        this.currentCode = c;
     }
 
     public void onAnswerClick(View v) {
-        showRandomSelection();
+        rounds++;
+        if(this.currentCode.check(1)) {
+            if(this.rounds == Code.MAX_ROUNDS) {
+                startActivity(new Intent(this, WinActivity.class));
+                finish();
+            } else {
+                showRandomSelection();
+            }
+        } else {
+            errorCount++;
+            Intent intent = new Intent(this, WrongActivity.class);
+            intent.putExtra("errorCount", errorCount);
+            startActivity(intent);
+        }
     }
 }

@@ -3,6 +3,8 @@ package de.tum.hack.defuse_app.model;
 import java.util.Arrays;
 
 public class Code {
+    public static final int MAX_ROUNDS = 20;
+    public static final int MAX_ERRORS = 3;
     int code1;
     int code2;
     int code3;
@@ -29,5 +31,9 @@ public class Code {
 
     public int getCode3() {
         return this.code3;
+    }
+
+    public boolean check(int selection) {
+        return false;
     }
 }

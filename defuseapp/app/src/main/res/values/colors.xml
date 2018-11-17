@@ -2,6 +2,7 @@
 <resources>
     <color name="colorPrimary">#bdbdbd</color>
     <color name="colorPrimaryDark">#636363</color>
+    <color name="colorRed">#ff0000</color>
     <color name="colorAccent">#D81B60</color>
     <color name="hotpink">#ff69b4</color>
     <color name="darkblue">#00008b</color>
