@@ -1,2 +1,3 @@
 # DefuseCPU
-`pip install RPi.GPIO numpy`
+`pip install numpy`
+`sudo apt-get install python3-rpi.gpio`

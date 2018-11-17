@@ -15,7 +15,6 @@ deltaTimes = [[0] for i in range(len(inPINS))]
 def my_callback1(channel):
   i = inPINS.index(channel)
   v = GPIO.input(inPINS[i])
-  #GPIO.output(outPINS[0], v) # mirror input state to output state directly (forward servo value only) - don't set PWM then for this pin
   if (v==0):
     downTimes[i].append(getTimex())
     if len(downTimes[i])>smoothingWindowLength: del downTimes[i][0]
