@@ -1,6 +1,8 @@
 from car.stepper2 import Engine
 from car.collision import Collision
+from car.receiver import Receiver
 from udp_server.server import Server
+from udp_server.server import Client
 
 import RPi.GPIO as GPIO
 import json
@@ -25,12 +27,16 @@ class Runner:
         GPIO.setmode(GPIO.BCM)
         self.__engine = Engine(pin_cfg)
         self.__collision = Collision(16, 20, 21, self.distance_callback)
+        self.__receiver = Receiver(12, self.receiver_callback)
 
     def distance_callback(self, distance):
         print("got distance:" + str(distance))
         if distance < 10:
             # send "hit the wall" to app
-            client.send("explode")
+            self.__client.send_data("explode")
+
+    def receiver_callback(self, rotation):
+        print("steering rotation " + str(rotation))
 
     def callback_function(self, message):
         print(message)

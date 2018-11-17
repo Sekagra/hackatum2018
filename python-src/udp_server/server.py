@@ -48,13 +48,11 @@ class Client:
         self.ip = ip
         self.port = port
 
-    def send_data(message):
-        print("UDP target IP:", UDP_IP)
-        print("UDP target port:", UDP_PORT)
-        print("message:", MESSAGE)
+    def send_data(self, message):
+        print("message:", message)
 
         sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) # UDP
-        sock.sendto(bytes(message), (self.ip, self.port))
+        sock.sendto(message.encode(), (self.ip, self.port))
 
 #while 1:
 #    print("Send Data")
