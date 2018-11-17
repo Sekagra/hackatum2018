@@ -33,7 +33,7 @@ public class WrongActivity extends AppCompatActivity {
 
             // send game over to car
             UdpClient.send("{ \"cmd\": \"lose\" }");
-            
+
             Thread task = new Thread(() -> {
                 AudioHelper.playAudio(getResources(), R.raw.explode, false);
                 try {

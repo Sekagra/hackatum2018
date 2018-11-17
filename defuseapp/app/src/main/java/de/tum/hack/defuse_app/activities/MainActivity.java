@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements ServerResponseHan
     @Override
     public void handle(String message) {
         // on 'stop' from the raspi, lose game
-        if(message.contains("stop")) {
+        if(message.contains("explode")) {
             Intent i = new Intent(this, WrongActivity.class);
             i.putExtra("errorCount", Code.MAX_ERRORS);
             startActivity(i);
