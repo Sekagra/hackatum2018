@@ -57,7 +57,7 @@ public class DefuseSequenceActivity extends AppCompatActivity {
 
     public void onAnswerClick(View v) {
         rounds++;
-        if(this.currentCode.check((int)(((TextView)v).getText().charAt(0)))) {
+        if(this.currentCode.check(((TextView)v).getText().codePoints().toArray()[0])) {
             if(this.rounds == Code.MAX_ROUNDS) {
                 startActivity(new Intent(this, WinActivity.class));
                 finish();
