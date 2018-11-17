@@ -1,6 +1,7 @@
 from car.stepper2 import Engine
 from car.collision import Collision
 from udp_server.server import Server
+from udp_server.server import Client
 
 import RPi.GPIO as GPIO
 import json
@@ -30,7 +31,7 @@ class Runner:
         print("got distance:" + str(distance))
         if distance < 10:
             # send "hit the wall" to app
-            client.send("explode")
+            self.__client.send_data("explode")
 
     def callback_function(self, message):
         print(message)
