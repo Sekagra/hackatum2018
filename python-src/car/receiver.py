@@ -5,6 +5,9 @@ import numpy as np
 
 SMOOTHING_WINDOW = 5
 
+LOWER_BOUND = 6.7
+UPPER_BOUND = 13
+
 class Receiver:
     def __init__(self, steering_port, callback):
         self.__receiver_thread = threading.Thread(
@@ -44,5 +47,5 @@ class Receiver:
             values = self.__deltaTimes[-SMOOTHING_WINDOW:]
             print(values)
             average = np.mean(values)
-            self.__callback((average - 6.5) / (13 - 6.5) * 100)
+            self.__callback((average - LOWER_BOUND) / (UPPER_BOUND - LOWER_BOUND) * 100)
             time.sleep(0.1)

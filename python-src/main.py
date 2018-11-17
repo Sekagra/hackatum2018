@@ -19,8 +19,8 @@ pin_cfg = {
 
 class Runner:
     def __init__(self):
-        #server_ip = "192.168.2.1"
-        server_ip = "131.159.198.40"
+        server_ip = "192.168.2.1"
+        #server_ip = "131.159.198.40"
         server_port = 5001
         client_ip = "192.168.2.72"
         client_port = 5003
@@ -28,7 +28,7 @@ class Runner:
         self.__client = Client(client_ip, client_port)
         GPIO.setmode(GPIO.BCM)
         self.__engine = Engine(pin_cfg)
-        self.__steering = Steering(23)
+        self.__steering = Steering(23) #init before receiver
         self.__collision = Collision(16, 20, 21, self.distance_callback)
         self.__receiver = Receiver(12, self.receiver_callback)
 
