@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Code {
-    public static final int MAX_ROUNDS = 20;
+    public static final int MAX_ROUNDS = 15;
     public static final int MAX_ERRORS = 3;
     List<Integer> codeList;
     int correctCode;

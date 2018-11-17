@@ -29,7 +29,18 @@ public class WrongActivity extends AppCompatActivity {
         if (errorCount == Code.MAX_ERRORS) {
             txtLose.setVisibility(View.VISIBLE);
             layoutWrong.setVisibility(View.GONE);
-            AudioHelper.playAudio(getResources(), R.raw.explode, false);
+            Thread task = new Thread(() -> {
+                AudioHelper.playAudio(getResources(), R.raw.explode, false);
+                try {
+                    Thread.sleep(2000L);
+                    AudioHelper.playAudio(getResources(), R.raw.terrorwin, false);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            });
+
+            task.start();
+
         } else {
             txtLose.setVisibility(View.GONE);
             layoutWrong.setVisibility(View.VISIBLE);
@@ -45,6 +56,7 @@ public class WrongActivity extends AppCompatActivity {
             }
 
             AudioHelper.playAudio(getResources(), R.raw.beep, false);
+
 
             // go back after some time
             Handler mHandler = new Handler();
