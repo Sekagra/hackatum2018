@@ -1,0 +1,18 @@
+\definecolor{myGrey}{RGB}{147,147,147}
+
+\colorlet{objectColor}{gray!40}
+\colorlet{docColor}{white}
+
+\definecolor{pythonCommentColor}{rgb}{0,0.6,0}
+\definecolor{lineNumberColor}{rgb}{0.5,0.5,0.5}
+\definecolor{pythonStringColor}{rgb}{0.58,0,0.82}
+\definecolor{pythonKeywordColor}{rgb}{0.26,0.235,0.87}
+\definecolor{pythonIdentifierColor}{rgb}{0, 0.55, 0.69}
+
+\definecolor{XmlCommentColor}{rgb}{0.02,0.7,0}
+\definecolor{XmlKeywordColor}{rgb}{0.7,0,0}
+\definecolor{XmlIdentifierColor}{rgb}{0.517,0,0.776}
+\definecolor{XmlStringColor}{rgb}{0.313,0.313,1}
+
+\definecolor{good}{RGB}{161,217,155} % {113,151,108}
+\definecolor{malicious}{RGB}{227,74,51} % {159, 52, 36}
