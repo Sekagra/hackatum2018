@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity implements ServerResponseHan
     public void handle(String message) {
         // on 'stop' from the raspi, lose game
         if(message.contains("explode")) {
+            udpServer.interrupt();
             Intent i = new Intent(this, WrongActivity.class);
             i.putExtra("errorCount", Code.MAX_ERRORS);
             startActivity(i);

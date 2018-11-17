@@ -7,7 +7,7 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.SocketException;
 
-public class UdpServer extends Thread{
+public class UdpServer extends Thread {
 
     private static final int PORT = 5003;
     DatagramSocket socket;
@@ -36,6 +36,9 @@ public class UdpServer extends Thread{
 
             while(running){
                 byte[] buf = new byte[256];
+
+                if(this.isInterrupted())
+                    return;
 
                 // receive request
                 DatagramPacket packet = new DatagramPacket(buf, buf.length);
