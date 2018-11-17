@@ -1,33 +1,35 @@
 package de.tum.hack.defuse_app.model;
 
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class Code {
-    int code1;
-    int code2;
-    int code3;
+    public static final int MAX_ROUNDS = 20;
+    public static final int MAX_ERRORS = 3;
+    List<Integer> codeList;
+    int correctCode;
 
     public static Code fromResourceString(String resources) {
         int[] ints = Arrays.stream(resources.split(",")).mapToInt(i -> Integer.decode(i)).toArray();
 
-        return new Code(ints[0], ints[1], ints[2]);
+        return new Code(ints);
     }
 
-    public Code(int code1, int code2, int code3) {
-        this.code1 = code1;
-        this.code2 = code2;
-        this.code3 = code3;
+    public Code(int[] codes) {
+        this.correctCode = codes[0];
+
+        // randomize for display
+        this.codeList = Arrays.stream(codes).boxed().collect(Collectors.toList());
+        Collections.shuffle(codeList);
     }
 
-    public int getCode1() {
-        return this.code1;
+    public List<Integer> getCodes() {
+        return this.codeList;
     }
 
-    public int getCode2() {
-        return this.code2;
-    }
-
-    public int getCode3() {
-        return this.code3;
+    public boolean check(int selectedCode) {
+        return this.correctCode == selectedCode;
     }
 }
