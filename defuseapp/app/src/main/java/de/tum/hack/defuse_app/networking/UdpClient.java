@@ -15,10 +15,9 @@ public class UdpClient {
             DatagramSocket socket = null;
             try {
                 socket = new DatagramSocket(port);
-                InetAddress IPAddress =  InetAddress.getByName("192.168.2.1");
+                InetAddress ipAddress =  InetAddress.getByName("192.168.2.1");
 
-                DatagramPacket sendData = new DatagramPacket(data.getBytes(), data.getBytes().length, IPAddress, port);
-                socket.setBroadcast(true);
+                DatagramPacket sendData = new DatagramPacket(data.getBytes(), data.getBytes().length, ipAddress, port);
                 socket.send(sendData);
                 socket.close();
             } catch (SocketException e) {

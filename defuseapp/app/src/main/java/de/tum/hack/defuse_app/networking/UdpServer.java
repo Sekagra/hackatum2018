@@ -17,6 +17,7 @@ public class UdpServer extends Thread{
 
     public UdpServer(ServerResponseHandler response) {
         super();
+        this.handler = response;
     }
 
     public void setRunning(boolean running){

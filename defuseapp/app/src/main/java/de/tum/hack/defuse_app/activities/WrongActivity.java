@@ -30,6 +30,10 @@ public class WrongActivity extends AppCompatActivity {
         if (errorCount == Code.MAX_ERRORS) {
             txtLose.setVisibility(View.VISIBLE);
             layoutWrong.setVisibility(View.GONE);
+
+            // send game over to car
+            UdpClient.send("{ \"cmd\": \"lose\" }");
+            
             Thread task = new Thread(() -> {
                 AudioHelper.playAudio(getResources(), R.raw.explode, false);
                 try {
@@ -38,9 +42,6 @@ public class WrongActivity extends AppCompatActivity {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-
-                // send game over to car
-                UdpClient.send("{ \"cmd\": \"lose\" }");
             });
 
             task.start();
