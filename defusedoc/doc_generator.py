@@ -19,9 +19,10 @@ def generate_random_sequence(length):
 
 def output_as_tex_table(sequence):
     table =  "\\begin{table}[htpb]" + "\n"
+    table += "  \\renewcommand{\\arraystretch}{3}" + "\n"
     table += "  \centering" + "\n"
-    table += "  \\begin{tabular}{p{60mm} | c}" + "\n"
-    table += "      \\textbf{Task} & \\textbf{Solution} \\\\" + "\n"
+    table += "  \\begin{tabular}{p{60mm} | P{20mm}}" + "\n"
+    table += "      \\Large{\\textbf{Task}} & \\Large{\\textbf{Solution}} \\\\" + "\n"
     table += "      \\hline" + "\n"
     for t in sequence:
         solution = t[0]
@@ -30,7 +31,7 @@ def output_as_tex_table(sequence):
 
     table += "   \end{tabular}" + "\n"
     table += "\end{table}" + "\n"
-    print(table)
+    #print(table)
     return table
 
 def find_missing():
@@ -43,11 +44,31 @@ def find_missing():
                 if findings is None:
                     print(t)
 
-def output_as_tex_file():
-    pass
+def get_tex_header():
+    with open("header.tex") as f:
+        data = f.read()
+        return data + "\n"
+
+def output_as_tex_file(sequences):
+    i = 0
+    document = get_tex_header()
+    document += "\\begin{document}" + "\n"
+    for seq in sequences:
+
+        document += "\\section*{Defuse Task " + str(i).zfill(3) + "}" + "\n"
+        document += output_as_tex_table(seq)
+        document += "\\newpage" + "\n"
+        i += 1
+    document += "\\end{document}" + "\n"
+    print(document)
+    return document
 
 #find_missing()
 #exit()
-randseq = generate_random_sequence(15)
-output_as_tex_table(tasks[0:20])
-output_as_tex_table(tasks[20:])
+num_sequences = 10
+sequence_length = 15
+seqs = []
+for i in range(num_sequences):
+    seqs.append(generate_random_sequence(sequence_length))
+
+output_as_tex_file(seqs)

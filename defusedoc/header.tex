@@ -1,0 +1,56 @@
+%----------------------------------------------------------------------------------------
+%       PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+\documentclass[paper=a4paper, fontsize=12pt]{article}
+\usepackage[english]{babel} % English language/hyphenation
+\usepackage{amsmath,amsfonts,amsthm} % Math packages
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\geometry{
+  left=3cm,
+  right=3cm,
+  top=2cm,
+  bottom=0cm,
+  bindingoffset=5mm
+}
+
+\usepackage{ifxetex}
+\usepackage{ifluatex}
+
+\ifxetex
+  \usepackage[ios,font=seguiemj.ttf]{emoji}
+  \usepackage{fontspec}
+  \newcommand{\dogline}{The \emoji{23E9} brown \emoji{1F43A} jumps over the lazy \emoji{1F436}.}
+\else
+  \ifluatex
+    \usepackage[ios,font=Symbola_hint.ttf]{emoji}
+    \usepackage{fontspec}
+    \newcommand{\dogline}{The \emoji{23E9} brown \emoji{1F43A} jumps over the lazy \emoji{1F436}.}
+  \else
+    \usepackage[T1]{fontenc}
+    \usepackage[utf8]{inputenc}
+    \usepackage[ios]{emoji}
+    \newcommand{\dogline}{The ⏩ brown 🐺 jumps over the lazy 🐶.}
+  \fi
+\fi
+ 
+\usepackage{times}
+\usepackage{graphicx}
+\usepackage[unicode]{hyperref}
+
+\usepackage{array}
+
+\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
+
+
+
+
+
+
+  
+%----------------------------------------------------------------------------------------
+%       TITLE SECTION
+%----------------------------------------------------------------------------------------
+\title{Defuse Manual}
+\date{}
+ 
