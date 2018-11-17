@@ -5,4 +5,4 @@ all: Defuse_Manual.tex
 
 
 clean:
-	rm *.aux *.log *.blg *.bbl *.pdf *.out
+	rm *.aux *.log *.blg *.bbl *.out
