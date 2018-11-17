@@ -25,17 +25,12 @@ def my_callback1(channel):
   if len(deltaTimes[i])>smoothingWindowLength: del deltaTimes[i][0]
 
 GPIO.add_event_detect(inPINS[0], GPIO.BOTH, callback=my_callback1)
-GPIO.add_event_detect(inPINS[1], GPIO.BOTH, callback=my_callback1)
 
 try:
   while True:
     ovl = deltaTimes[0][-smoothingWindowLength:] # output first pin PWM
     ov = sorted(ovl)[len(ovl) // 2] #ov = np.mean(ovl)
     print("channel 1: " + str(ov))
-
-    ovl = deltaTimes[1][-smoothingWindowLength:] # output first pin PWM
-    ov = sorted(ovl)[len(ovl) // 2] #ov = np.mean(ovl)
-    print("channel 2: " + str(ov))
 
     time.sleep(0.1)
 except KeyboardInterrupt:
