@@ -1,6 +1,7 @@
 from car.stepper2 import Engine
 from udp_server.server import Server
 
+import RPi.GPIO as GPIO
 import json
 
 pin_cfg = {
@@ -15,8 +16,9 @@ pin_cfg = {
 class Runner:
     def __init__(self):
         ip = "192.168.2.1"
-        port = 5003
+        port = 5001
         self.__udp_server = Server(ip, port, self.callback_function)
+        GPIO.setmode(GPIO.BCM)
         self.__engine = Engine(pin_cfg)
 
     def callback_function(self, message):
@@ -26,4 +28,8 @@ class Runner:
         if parsed_msg["cmd"] == "start":
             speed = int(parsed_msg["speed"])
             self.__engine.drive(speed)
-    
+        elif parsed_msg["cmd"] == "lose":
+            self.__engine.drive(0)
+
+if __name__ == "__main__":
+    r = Runner()

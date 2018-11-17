@@ -66,6 +66,7 @@ class Engine:
                     FULL_SPEED_DELAY +
                     (100 - self.__speed) * (ONE_PERCENT_SPEED_DELAY - FULL_SPEED_DELAY) / 99
                 )
+        self.__drive_thread = None
 
     def drive(self, speed):
         if speed < 0:

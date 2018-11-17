@@ -17,6 +17,7 @@ class ServerProtocol:
         self.transport = transport
 
     def datagram_received(self, data, addr):
+        print(data)
         message = data.decode()
         print('Received %r from %s' % (message, addr))
         if self.__callback:
