@@ -1,12 +1,12 @@
 import RPi.GPIO as GPIO
 import time
-import numpy as np
-inPINS = [2,3,4,14,15,18,17,27,22,23]
+inPINS = [17,27]
 smoothingWindowLength=4
 
 def getTimex():
     return time.time()
 
+GPIO.setmode(GPIO.BCM)
 GPIO.setup(inPINS, GPIO.IN)
 upTimes = [[0] for i in range(len(inPINS))]
 downTimes = [[0] for i in range(len(inPINS))]
@@ -32,7 +32,12 @@ try:
   while True:
     ovl = deltaTimes[0][-smoothingWindowLength:] # output first pin PWM
     ov = sorted(ovl)[len(ovl) // 2] #ov = np.mean(ovl)
-    print ov
+    print("channel 1: " + str(ov))
+
+    ovl = deltaTimes[1][-smoothingWindowLength:] # output first pin PWM
+    ov = sorted(ovl)[len(ovl) // 2] #ov = np.mean(ovl)
+    print("channel 2: " + str(ov))
+
     time.sleep(0.1)
 except KeyboardInterrupt:
-  GPIO.cleanup()
+	GPIO.cleanup()
