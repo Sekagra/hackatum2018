@@ -16,9 +16,12 @@ pin_cfg = {
 
 class Runner:
     def __init__(self):
-        ip = "131.159.198.40"
-        port = 5001
-        self.__udp_server = Server(ip, port, self.callback_function)
+        server_ip = "192.168.2.1"
+        server_port = 5001
+        client_ip = "192.168.2.72"
+        client_port = 5003
+        self.__udp_server = Server(server_ip, server_port, self.callback_function)
+        self.__client = Client(client_ip, client_port)
         GPIO.setmode(GPIO.BCM)
         self.__engine = Engine(pin_cfg)
         self.__collision = Collision(16, 20, 21, self.distance_callback)
@@ -26,7 +29,8 @@ class Runner:
     def distance_callback(self, distance):
         print("got distance:" + str(distance))
         if distance < 10:
-            raise Exception("Kabumm")
+            # send "hit the wall" to app
+            client.send("explode")
 
     def callback_function(self, message):
         print(message)

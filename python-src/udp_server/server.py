@@ -31,9 +31,9 @@ class ServerProtocol:
         #self.transport.sendto(data, addr)
 
 class Server:
-    def __init__(self, IP, port, callback):
+    def __init__(self, ip, port, callback):
         self.__loop = asyncio.get_event_loop()
-        listen = self.__loop.create_datagram_endpoint(ServerProtocol, local_addr=(IP, port))
+        listen = self.__loop.create_datagram_endpoint(ServerProtocol, local_addr=(ip, port))
         transport, protocol = self.__loop.run_until_complete(listen)
         protocol.set_callback(callback)
 
@@ -43,17 +43,18 @@ class Server:
         print("Starting UDP server")
         self.__server_thread.start()
 
-def send_data():
-    UDP_IP = "192.168.2.72"
-    UDP_PORT = 5003
-    MESSAGE = b"Ehrenmann"
+class Client:
+    def __init__(self, ip, port):
+        self.ip = ip
+        self.port = port
 
-    print("UDP target IP:", UDP_IP)
-    print("UDP target port:", UDP_PORT)
-    print("message:", MESSAGE)
+    def send_data(message):
+        print("UDP target IP:", UDP_IP)
+        print("UDP target port:", UDP_PORT)
+        print("message:", MESSAGE)
 
-    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) # UDP
-    sock.sendto(MESSAGE, (UDP_IP, UDP_PORT))
+        sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) # UDP
+        sock.sendto(bytes(message), (self.ip, self.port))
 
 #while 1:
 #    print("Send Data")
