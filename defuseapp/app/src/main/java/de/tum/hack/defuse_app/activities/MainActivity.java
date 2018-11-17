@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity implements ServerResponseHan
     }
 
     public void onStartClick(View v) {
-        UdpClient.send("[start]");
+        UdpClient.send("{ \"cmd\": \"start\", \"speed\": 60 }");
         startActivity(new Intent(this, DefuseSequenceActivity.class));
     }
 

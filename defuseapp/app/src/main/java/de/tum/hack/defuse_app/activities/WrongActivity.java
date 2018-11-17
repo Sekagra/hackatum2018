@@ -40,7 +40,7 @@ public class WrongActivity extends AppCompatActivity {
                 }
 
                 // send game over to car
-                UdpClient.send("[lose]");
+                UdpClient.send("{ \"cmd\": \"lose\" }");
             });
 
             task.start();

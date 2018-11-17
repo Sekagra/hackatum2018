@@ -19,6 +19,6 @@ public class WinActivity extends AppCompatActivity {
         AudioHelper.playAudio(getResources(), R.raw.bombdef, false);
 
         // Notify car
-        UdpClient.send("[win]");
+        UdpClient.send("{ \"cmd\": \"win\" }");
     }
 }
