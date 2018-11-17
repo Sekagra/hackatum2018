@@ -1,4 +1,4 @@
-package de.tum.hack.defuse_app;
+package de.tum.hack.defuse_app.helper;
 
 import android.content.res.AssetFileDescriptor;
 import android.content.res.Resources;

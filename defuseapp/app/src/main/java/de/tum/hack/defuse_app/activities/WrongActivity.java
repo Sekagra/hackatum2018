@@ -7,12 +7,13 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import de.tum.hack.defuse_app.AudioHelper;
-import de.tum.hack.defuse_app.EmojiHelper;
-import de.tum.hack.defuse_app.R;
-import de.tum.hack.defuse_app.model.Code;
+import java.io.IOException;
 
-import static de.tum.hack.defuse_app.model.Code.MAX_ERRORS;
+import de.tum.hack.defuse_app.helper.AudioHelper;
+import de.tum.hack.defuse_app.helper.EmojiHelper;
+import de.tum.hack.defuse_app.R;
+import de.tum.hack.defuse_app.networking.UdpClient;
+import de.tum.hack.defuse_app.model.Code;
 
 public class WrongActivity extends AppCompatActivity {
 
@@ -37,6 +38,9 @@ public class WrongActivity extends AppCompatActivity {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+
+                // send game over to car
+                UdpClient.send("[lose]");
             });
 
             task.start();
@@ -68,5 +72,10 @@ public class WrongActivity extends AppCompatActivity {
 
             }, 1500L);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        // do nothing
     }
 }

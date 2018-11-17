@@ -6,12 +6,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import de.tum.hack.defuse_app.EmojiHelper;
+import de.tum.hack.defuse_app.helper.EmojiHelper;
 import de.tum.hack.defuse_app.R;
 import de.tum.hack.defuse_app.model.Code;
 
