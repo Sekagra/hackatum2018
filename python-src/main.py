@@ -22,7 +22,7 @@ class Runner:
         server_ip = "192.168.2.1"
         #server_ip = "131.159.198.40"
         server_port = 5001
-        client_ip = "192.168.2.72"
+        client_ip = "192.168.2.19"
         client_port = 5003
         self.__udp_server = Server(server_ip, server_port, self.callback_function)
         self.__client = Client(client_ip, client_port)
