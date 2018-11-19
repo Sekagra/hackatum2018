@@ -5,4 +5,4 @@ This project was created in the context of HackaTUM 2018. The Android game and t
 
 At the end the project was actually declared as one of the winners...YEAH:
 
-[https://devpost.com/software/speed-051yjo]
+https://devpost.com/software/speed-051yjo
